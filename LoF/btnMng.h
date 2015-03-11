@@ -44,11 +44,12 @@ enum class BTN : int
 
 //格ゲー用のボタン名称に変換
 #define eBTN (int)BTN::
-#define S B
-#define L Y
-#define M X
-#define H A
-#define D R1
+#define Sp R1
+#define Low Y
+#define Mid X
+#define Hi A
+#define Ult B
+#define Tri L1
 
 class btnMng
 {

@@ -120,54 +120,69 @@ bool btnMng::GetBtnState(PNUM player,BTN btn)
 	//方向キー
 	case eBTN D1:
 		if (pov == 22500) return true;
-		if ((pad & (1 << m_setting[pInt][eBTN D2])) && (pad & (1 << m_setting[pInt][eBTN D4]))) return true;
+		if ( (pad & (1 << m_setting[pInt][eBTN D2])) && (pad & (1 << m_setting[pInt][eBTN D4]))) return true;
+		break;
 	case eBTN D2:
 		if (pov == 18000) return true;
-		if (pad & (1 << m_setting[pInt][btnInt])) return true;
+		if (pad & (1 << m_setting[pInt][eBTN D2])) return true;
+		break;
 	case eBTN D3:
 		if (pov == 13500) return true;
 		if ((pad & (1 << m_setting[pInt][eBTN D2])) && (pad & (1 << m_setting[pInt][eBTN D6]))) return true;
+		break;
 	case eBTN D4:
 		if (pov == 27000) return true;
-		if (pad & (1 << m_setting[pInt][btnInt])) return true;
+		if (pad & (1 << m_setting[pInt][eBTN D4])) return true;
+		break;
 	case eBTN D5:
-		return false;
+		break;
 	case eBTN D6:
 		if (pov == 9000) return true;
-		if (pad & (1 << m_setting[pInt][btnInt]))  return true;
+		if (pad & (1 << m_setting[pInt][eBTN D6]))  return true;
+		break;
 	case eBTN D7:
 		if (pov == 31500) return true;
 		if ((pad & (1 << m_setting[pInt][eBTN D8])) && (pad & (1 << m_setting[pInt][eBTN D4]))) return true;
+		break;
 	case eBTN D8:
 		if (pov == 0) return true;
-		if (pad & (1 << m_setting[pInt][btnInt])) return true;
+		if (pad & (1 << m_setting[pInt][eBTN D8])) return true;
+		break;
 	case eBTN D9:
 		if (pov == 4500) return true;
 		if ((pad & (1 << m_setting[pInt][eBTN D8])) && (pad & (1 << m_setting[pInt][eBTN D6]))) return true;
+		break;
 
 	//システムボタン
 	case eBTN YES:
 		if (m_key[KEY_INPUT_RETURN] > 0)return true;
 		if (pad & (1 << m_setting[pInt][btnInt]))return true;
+		break;
 	case eBTN NO:
 		if (m_key[KEY_INPUT_BACK] > 0)return true;
 		if (pad & (1 << m_setting[pInt][btnInt]))return true;
+		break;
 	case eBTN S2:
 		if (m_key[KEY_INPUT_DOWN] > 0)return true;
 		if (pad & (1 << m_setting[pInt][btnInt]))return true;
+		break;
 	case eBTN S4:
 		if (m_key[KEY_INPUT_LEFT] > 0)return true;
 		if (pad & (1 << m_setting[pInt][btnInt]))return true;
+		break;
 	case eBTN S6:
 		if (m_key[KEY_INPUT_RIGHT] > 0)return true;
 		if (pad & (1 << m_setting[pInt][btnInt]))return true;
+		break;
 	case eBTN S8:
 		if (m_key[KEY_INPUT_UP] > 0)return true;
 		if (pad & (1 << m_setting[pInt][btnInt]))return true;
+		break;
 
 	//通常のボタン
 	default:
 		if (pad & (1 << m_setting[pInt][btnInt]))return true;
+		break;
 	}
 	return false;
 }
@@ -192,6 +207,7 @@ int btnMng::GetPadState(PNUM player)
 //現在のフレームのPOV（ハットスイッチ）の状態を得る
 unsigned int btnMng::GetPovState(PNUM player)
 {
+
 	DINPUT_JOYSTATE input;
 	switch (player)
 	{
@@ -208,7 +224,7 @@ unsigned int btnMng::GetPovState(PNUM player)
 		GetJoypadDirectInputState(DX_INPUT_PAD4, &input);
 		return input.POV[0];
 	}
-	return 0;
+	return 0xffffffff;
 }
 
 //同時入力の優先処理
@@ -235,11 +251,37 @@ void btnMng::ConvertBtnPriority(PNUM player)
 	if (m_input[pInt][eBTN D7]>0 || m_input[pInt][eBTN D4]>0 || m_input[pInt][eBTN D1]>0) m_input[pInt][eBTN D9] = 0, m_input[pInt][eBTN D6] = 0, m_input[pInt][eBTN D3] = 0;
 
 	//同時押しボタンが押されたときの処理
-	if (m_input[pInt][eBTN D] > 0)
+	if (m_input[pInt][eBTN Tri] > 0)
 	{
-		if (m_input[pInt][eBTN D] > m_input[pInt][eBTN L])m_input[pInt][eBTN L] = m_input[pInt][eBTN D];
-		if (m_input[pInt][eBTN D] > m_input[pInt][eBTN M])m_input[pInt][eBTN M] = m_input[pInt][eBTN D];
-		if (m_input[pInt][eBTN D] > m_input[pInt][eBTN H])m_input[pInt][eBTN H] = m_input[pInt][eBTN D];
+		if (m_input[pInt][eBTN Tri] > m_input[pInt][eBTN Low])m_input[pInt][eBTN Low] = m_input[pInt][eBTN Tri];
+		if (m_input[pInt][eBTN Tri] > m_input[pInt][eBTN Mid])m_input[pInt][eBTN Mid] = m_input[pInt][eBTN Tri];
+		if (m_input[pInt][eBTN Tri] > m_input[pInt][eBTN Hi])m_input[pInt][eBTN Hi] = m_input[pInt][eBTN Tri];
+	}
+
+	//キーボード十字キー
+	if (m_input[pInt][eBTN S6] > 0)
+	{
+		m_input[pInt][eBTN S2] = 0;
+		m_input[pInt][eBTN S4] = 0;
+		m_input[pInt][eBTN S8] = 0;
+	}
+	else if (m_input[pInt][eBTN S4] > 0)
+	{
+		m_input[pInt][eBTN S2] = 0;
+		m_input[pInt][eBTN S6] = 0;
+		m_input[pInt][eBTN S8] = 0;
+	}
+	else if (m_input[pInt][eBTN S2] > 0)
+	{
+		m_input[pInt][eBTN S6] = 0;
+		m_input[pInt][eBTN S4] = 0;
+		m_input[pInt][eBTN S8] = 0;
+	}
+	else if (m_input[pInt][eBTN S8] > 0)
+	{
+		m_input[pInt][eBTN S2] = 0;
+		m_input[pInt][eBTN S6] = 0;
+		m_input[pInt][eBTN S4] = 0;
 	}
 }
 
@@ -248,45 +290,45 @@ void btnMng::ConvertTsuji(PNUM player)
 {
 	int pInt = (int)player;
 
-	if (m_input[pInt][eBTN L] == 2)
+	if (m_input[pInt][eBTN Low] == 2)
 	{
-		if (m_input[pInt][eBTN M] == 1 || m_input[pInt][eBTN H] == 1 || m_input[pInt][eBTN D] == 1)
+		if (m_input[pInt][eBTN Mid] == 1 || m_input[pInt][eBTN Hi] == 1 || m_input[pInt][eBTN Ult] == 1)
 		{
-			m_input[pInt][eBTN L] = 1;
-			m_tsujiBtn[pInt][eBTN L] = true;
+			m_input[pInt][eBTN Low] = 1;
+			m_tsujiBtn[pInt][eBTN Low] = true;
 		}
 	}
-	else m_tsujiBtn[pInt][eBTN L] = false;
+	else m_tsujiBtn[pInt][eBTN Low] = false;
 
-	if (m_input[pInt][eBTN M] == 2)
+	if (m_input[pInt][eBTN Mid] == 2)
 	{
-		if (m_input[pInt][eBTN L] == 1 || m_input[pInt][eBTN H] == 1 || m_input[pInt][eBTN S] == 1)
+		if (m_input[pInt][eBTN Low] == 1 || m_input[pInt][eBTN Hi] == 1 || m_input[pInt][eBTN Sp] == 1)
 		{
-			m_input[pInt][eBTN M] = 1;
-			m_tsujiBtn[pInt][eBTN M] = true;
+			m_input[pInt][eBTN Mid] = 1;
+			m_tsujiBtn[pInt][eBTN Mid] = true;
 		}
 	}
-	else m_tsujiBtn[pInt][eBTN M] = false;
+	else m_tsujiBtn[pInt][eBTN Mid] = false;
 
-	if (m_input[pInt][eBTN H] == 2)
+	if (m_input[pInt][eBTN Hi] == 2)
 	{
-		if (m_input[pInt][eBTN L] == 1 || m_input[pInt][eBTN M] == 1 || m_input[pInt][eBTN S] == 1)
+		if (m_input[pInt][eBTN Low] == 1 || m_input[pInt][eBTN Mid] == 1 || m_input[pInt][eBTN Sp] == 1)
 		{
-			m_input[pInt][eBTN H] = 1;
-			m_tsujiBtn[pInt][eBTN H] = true;
+			m_input[pInt][eBTN Hi] = 1;
+			m_tsujiBtn[pInt][eBTN Hi] = true;
 		}
 	}
-	else m_tsujiBtn[pInt][eBTN H] = false;
+	else m_tsujiBtn[pInt][eBTN Hi] = false;
 
-	if (m_input[pInt][eBTN S] == 2)
+	if (m_input[pInt][eBTN Sp] == 2)
 	{
-		if (m_input[pInt][eBTN L] == 1 || m_input[pInt][eBTN M] == 1 || m_input[pInt][eBTN H] == 1)
+		if (m_input[pInt][eBTN Low] == 1 || m_input[pInt][eBTN Mid] == 1 || m_input[pInt][eBTN Hi] == 1)
 		{
-			m_input[pInt][eBTN S] = 1;
-			m_tsujiBtn[pInt][eBTN S] = true;
+			m_input[pInt][eBTN Sp] = 1;
+			m_tsujiBtn[pInt][eBTN Sp] = true;
 		}
 	}
-	else m_tsujiBtn[pInt][eBTN S] = false;
+	else m_tsujiBtn[pInt][eBTN Sp] = false;
 }
 
 
@@ -354,9 +396,9 @@ void btnMng::ResetSetting(PNUM player)
 	m_setting[pInt][eBTN D2] = 0, m_setting[pInt][eBTN D4] = 1, m_setting[pInt][eBTN D6] = 2, m_setting[pInt][eBTN D8] = 3;
 	m_setting[pInt][eBTN S2] = 0, m_setting[pInt][eBTN S4] = 1, m_setting[pInt][eBTN S6] = 2, m_setting[pInt][eBTN S8] = 3;
 
-	m_setting[pInt][eBTN Y] = 4, m_setting[pInt][eBTN X] = 7, m_setting[pInt][eBTN A] = 9, m_setting[pInt][eBTN B] = 6;
-	m_setting[pInt][eBTN R1] = 5;
-	m_setting[pInt][eBTN ST] = 12, m_setting[pInt][eBTN SE] = 13;
+	m_setting[pInt][eBTN Y] = 3 + 4, m_setting[pInt][eBTN X] = 3 + 3, m_setting[pInt][eBTN A] = 3 + 1, m_setting[pInt][eBTN B] = 3 + 2;
+	m_setting[pInt][eBTN L1] = 3 + 5, m_setting[pInt][eBTN R1] = 3 + 6;
+	m_setting[pInt][eBTN ST] = 3 + 8, m_setting[pInt][eBTN SE] = 3 + 7;
 	
 	m_setting[pInt][eBTN YES] = 6, m_setting[pInt][eBTN NO] = 5;
 
@@ -364,6 +406,6 @@ void btnMng::ResetSetting(PNUM player)
 	m_setting[pInt][eBTN D1] = -1, m_setting[pInt][eBTN D3] = -1;
 	m_setting[pInt][eBTN D5] = -1;
 	m_setting[pInt][eBTN D7] = -1, m_setting[pInt][eBTN D9] = -1;
-	m_setting[pInt][eBTN L1] = -1, m_setting[pInt][eBTN L2] = -1, m_setting[pInt][eBTN L3] = -1;
+	m_setting[pInt][eBTN L2] = -1, m_setting[pInt][eBTN L3] = -1;
 	m_setting[pInt][eBTN R2] = -1, m_setting[pInt][eBTN R3] = -1;
 }
