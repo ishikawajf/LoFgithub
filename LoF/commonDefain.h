@@ -4,11 +4,14 @@
 //ヘッダーの読み込み
 //-------------------------------------------------------------------------------------
 #include <iostream>
-#include <string>
 #include <stdio.h>
 #include <math.h>
 #include "DxLib.h"
 
+#include <string>
+#include <list>
+#include <map>
+using namespace std;
 
 
 //-------------------------------------------------------------------------------------
@@ -29,11 +32,25 @@
 #define FontSizeBig 20
 
 //プレイ人数
-enum class PNUM:int
+enum class ePNUM:int
 {
 	p1, p2, p3, p4, All
 };
-#define ePNUM (int)PNUM::
 
 
+//-------------------------------------------------------------------------------------
+//関数
+//-------------------------------------------------------------------------------------
 
+//listの特定の値を参照する
+list<int>::iterator GetListIterator(list<int> lst ,int num)
+{
+	list<int>::iterator itr = lst.begin();
+	int counter = 0;
+	while (itr != lst.end() && counter <= num)
+	{
+		++itr;
+		counter++;
+	}
+	return itr;
+}

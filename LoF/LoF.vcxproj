@@ -73,11 +73,13 @@
     <ClInclude Include="btnMng.h" />
     <ClInclude Include="commonDefain.h" />
     <ClInclude Include="commonUtil.h" />
+    <ClInclude Include="drawMng.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="btnMng.cpp" />
     <ClCompile Include="commonUtil.cpp" />
+    <ClCompile Include="drawMng.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

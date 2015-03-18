@@ -41,23 +41,39 @@ void main::Update()
 {
 	m_commonUtil.CommonUpdate();
 
+	//ボタン表示テスト
+	TestDispInput();
+}
+
+
+//ボタン表示テスト
+void main::TestDispInput()
+{
+	int posX = 20;
+	int posY = 300;
+
 	// 文字列の描画
-	DrawFormatString(200, 240 - 100, GetColor(255, 255, 255), "%d ", m_commonUtil.GetBtnTime(PNUM::p1, BTN::D8));
-	DrawFormatString(200 - 30, 240 - 100, GetColor(255, 255, 255), "%d ", m_commonUtil.GetBtnTime(PNUM::p1, BTN::D7));
-	DrawFormatString(200 + 30, 240 - 100, GetColor(255, 255, 255), "%d ", m_commonUtil.GetBtnTime(PNUM::p1, BTN::D9));
+	DrawFormatString(posX, posY, GetColor(255, 255, 255), "%d ", m_commonUtil.GetBtnTime(ePNUM::p1, eBTN::D7));
+	DrawFormatString(posX + 20, posY, GetColor(255, 255, 255), "%d ", m_commonUtil.GetBtnTime(ePNUM::p1, eBTN::D8));
+	DrawFormatString(posX + 40, posY, GetColor(255, 255, 255), "%d ", m_commonUtil.GetBtnTime(ePNUM::p1, eBTN::D9));
 
-	DrawFormatString(200 + 30, 240 - 80, GetColor(255, 255, 255), "%d ", m_commonUtil.GetBtnTime(PNUM::p1, BTN::D6));
-	DrawFormatString(200 - 30, 240 - 80, GetColor(255, 255, 255), "%d ", m_commonUtil.GetBtnTime(PNUM::p1, BTN::D4));
+	DrawFormatString(posX, posY + 20, GetColor(255, 255, 255), "%d ", m_commonUtil.GetBtnTime(ePNUM::p1, eBTN::D4));
+	DrawFormatString(posX+40, posY + 20, GetColor(255, 255, 255), "%d ", m_commonUtil.GetBtnTime(ePNUM::p1, eBTN::D6));
+	
+	DrawFormatString(posX, posY + 40, GetColor(255, 255, 255), "%d ", m_commonUtil.GetBtnTime(ePNUM::p1, eBTN::D1));
+	DrawFormatString(posX + 20, posY + 40, GetColor(255, 255, 255), "%d ", m_commonUtil.GetBtnTime(ePNUM::p1, eBTN::D2));
+	DrawFormatString(posX + 40, posY + 40, GetColor(255, 255, 255), "%d ", m_commonUtil.GetBtnTime(ePNUM::p1, eBTN::D3));
 
-	DrawFormatString(200, 240 - 60, GetColor(255, 255, 255), "%d ", m_commonUtil.GetBtnTime(PNUM::p1, BTN::D2));
-	DrawFormatString(200 - 30, 240 - 60, GetColor(255, 255, 255), "%d ", m_commonUtil.GetBtnTime(PNUM::p1, BTN::D1));
-	DrawFormatString(200 + 30, 240 - 60, GetColor(255, 255, 255), "%d ", m_commonUtil.GetBtnTime(PNUM::p1, BTN::D3));
+	DrawFormatString(posX + 65, posY + 40, GetColor(255, 255, 255), "SE%d ", m_commonUtil.GetBtnTime(ePNUM::p1, eBTN::SE));
+	DrawFormatString(posX + 100, posY + 40, GetColor(255, 255, 255), "ST%d ", m_commonUtil.GetBtnTime(ePNUM::p1, eBTN::ST));
 
+	DrawFormatString(posX + 150, posY, GetColor(255, 255, 255), "L%d ", m_commonUtil.GetBtnTime(ePNUM::p1, eBTN::L1));
+	DrawFormatString(posX + 190, posY, GetColor(255, 255, 255), "R%d ", m_commonUtil.GetBtnTime(ePNUM::p1, eBTN::R1));
 
-	DrawFormatString(350, 200 - 80, GetColor(255, 255, 255), "A %d ", m_commonUtil.GetBtnTime(PNUM::p1, BTN::A));
-	DrawFormatString(350, 200 - 60, GetColor(255, 255, 255), "B %d ", m_commonUtil.GetBtnTime(PNUM::p1, BTN::B));
-	DrawFormatString(350, 200 - 40, GetColor(255, 255, 255), "X %d ", m_commonUtil.GetBtnTime(PNUM::p1, BTN::X));
-	DrawFormatString(350, 200 - 20, GetColor(255, 255, 255), "Y %d ", m_commonUtil.GetBtnTime(PNUM::p1, BTN::Y));
-	DrawFormatString(350, 200 - 0, GetColor(255, 255, 255), "L %d ", m_commonUtil.GetBtnTime(PNUM::p1, BTN::L1));
-	DrawFormatString(350, 200 + 20, GetColor(255, 255, 255), "R %d ", m_commonUtil.GetBtnTime(PNUM::p1, BTN::R1));
+	DrawFormatString(posX + 150, posY + 20, GetColor(255, 255, 255), "Y%d ", m_commonUtil.GetBtnTime(ePNUM::p1, eBTN::Y));
+	DrawFormatString(posX + 190, posY + 20, GetColor(255, 255, 255), "X%d ", m_commonUtil.GetBtnTime(ePNUM::p1, eBTN::X));
+	
+	DrawFormatString(posX + 150, posY + 40, GetColor(255, 255, 255), "B%d ", m_commonUtil.GetBtnTime(ePNUM::p1, eBTN::B));
+	DrawFormatString(posX + 190, posY + 40, GetColor(255, 255, 255), "A%d ", m_commonUtil.GetBtnTime(ePNUM::p1, eBTN::A));
+
 }

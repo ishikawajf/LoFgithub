@@ -1,14 +1,6 @@
 #include "commonUtil.h"
 
 //-------------------------------------------------------------------------------------
-// 終了
-//-------------------------------------------------------------------------------------
-commonUtil::~commonUtil()
-{
-
-}
-
-//-------------------------------------------------------------------------------------
 // 初期化
 //-------------------------------------------------------------------------------------
 commonUtil::commonUtil()
@@ -16,6 +8,14 @@ commonUtil::commonUtil()
 
 }
 
+
+//-------------------------------------------------------------------------------------
+// 終了
+//-------------------------------------------------------------------------------------
+commonUtil::~commonUtil()
+{
+
+}
 
 
 //-------------------------------------------------------------------------------------
@@ -44,20 +44,20 @@ void commonUtil::Wait60F()
 // ボタン操作
 //-------------------------------------------------------------------------------------
 // ボタンが押された時間をリセット
-void commonUtil::ResetBtnTime(PNUM player)
+void commonUtil::ResetBtnTime(ePNUM player)
 {
 	m_btnMng.ResetBtnTime(player);
 }
 
 //各ボタンが押された時間を得る
-int commonUtil::GetBtnTime(PNUM player, BTN btn)
+int commonUtil::GetBtnTime(ePNUM player, eBTN btn)
 {
 	return m_btnMng.GetBtnTime(player, btn);
 }
 
 
 //ボタン配置を初期化(1-4:各コントローラー )
-void commonUtil::ResetSetting(PNUM player)
+void commonUtil::ResetSetting(ePNUM player)
 {
 	m_btnMng.ResetSetting(player); 
 }

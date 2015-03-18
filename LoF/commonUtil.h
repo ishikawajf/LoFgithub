@@ -43,13 +43,14 @@ public:
 	void CommonUpdate();
 
 	// 各ボタンが押された時間を得る
-	int GetBtnTime(PNUM player, BTN btn);
+	int GetBtnTime(ePNUM player, eBTN btn);
 	// ボタンが押された時間をリセット
-	void ResetBtnTime(PNUM player);
+	void ResetBtnTime(ePNUM player);
 
 	//ボタン配置設定
 	//bool SettingBtn(PLAYER player, BTN btn);
 	//ボタン配置を初期化(1-4:各コントローラー )
-	void ResetSetting(PNUM player);
+	void ResetSetting(ePNUM player);
 
 };
+

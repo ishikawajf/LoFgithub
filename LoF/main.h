@@ -43,6 +43,8 @@ public:
 
 	//更新
 	void Update();
-
+	
+	//テストボタン表示
+	void TestDispInput();
 
 };

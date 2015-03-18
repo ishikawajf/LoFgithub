@@ -4,7 +4,7 @@
 //-------------------------------------------------------------------------------------
 //定義
 //-------------------------------------------------------------------------------------
-enum class BTN : int
+enum class eBTN : int
 {
 	//方向
 	D1,
@@ -43,7 +43,6 @@ enum class BTN : int
 };
 
 //格ゲー用のボタン名称に変換
-#define eBTN (int)BTN::
 #define Sp R1
 #define Low Y
 #define Mid X
@@ -59,16 +58,16 @@ private:
 	//-------------------------------------------------------------------------------------
 	//辻入力を有効にする
 	bool useTsuji = true;
-	bool m_tsujiBtn[ePNUM All][eBTN All];
+	bool m_tsujiBtn[(int)ePNUM:: All][(int)eBTN::All];
 
 	//キーボードの入力状態
 	int m_key[256]; 
 
 	//パッドの設定
-	int m_setting[ePNUM All][eBTN All];
+	int m_setting[(int)ePNUM::All][(int)eBTN::All];
 
 	//ボタンの入力状態
-	int m_input[ePNUM All][eBTN All];
+	int m_input[(int)ePNUM::All][(int)eBTN::All];
 
 
 	//-------------------------------------------------------------------------------------
@@ -81,15 +80,15 @@ private:
 	//キーボードの入力状態を更新する関数
 	void UpdateKeybord();
 	//指定したボタンが押されているかをチェック
-	bool btnMng::GetBtnState(PNUM player,BTN btn);
+	bool btnMng::GetBtnState(ePNUM player,eBTN btn);
 	//現在のフレームのパッドの状態を得る
-	int GetPadState(PNUM player);
+	int GetPadState(ePNUM player);
 	//現在のフレームのPOV（ハットスイッチ）の状態を得る
-	unsigned int GetPovState(PNUM player);
+	unsigned int GetPovState(ePNUM player);
 	//同時入力の優先処理
-	void ConvertBtnPriority(PNUM player);
+	void ConvertBtnPriority(ePNUM player);
 	//辻入力を適用する
-	void ConvertTsuji(PNUM player);
+	void ConvertTsuji(ePNUM player);
 
 public:
 	//-------------------------------------------------------------------------------------
@@ -108,13 +107,13 @@ public:
 
 	//各ボタンが押された時間
 	//1:押された 2～:押しっぱ -1:離した 0:押されていない
-	int GetBtnTime(PNUM player, BTN btn);
+	int GetBtnTime(ePNUM player, eBTN btn);
 	// ボタンが押された時間をリセット
-	void btnMng::ResetBtnTime(PNUM player);
+	void btnMng::ResetBtnTime(ePNUM player);
 
 	//ボタン配置設定
-	bool SettingBtn(PNUM player, BTN btn);
+	bool SettingBtn(ePNUM player, eBTN btn);
 	//ボタン配置を初期化(1-4:各コントローラー )
-	void ResetSetting(PNUM player);
+	void ResetSetting(ePNUM player);
 
 };
